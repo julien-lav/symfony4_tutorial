@@ -1,12 +1,14 @@
 
-### Connection to the database
+### Connexion to the database
 
 Edit `.env` the line with `DATABASE_URL=mysql://root:root@database:3306/mydatabase`.
 
 `docker rm $(docker ps -aq)`
+
 `docker-compose up -d`
 
 `docker-compose exec composer install`
+
 `docker-compose exec web composer req symfony/asset`
 
 `docker-compose exec web php bin/console asset:install`
