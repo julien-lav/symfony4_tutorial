@@ -7,7 +7,7 @@ Edit `.env` the line with `DATABASE_URL=mysql://root:root@database:3306/mydataba
 
 `docker-compose up -d`
 
-`docker-compose exec composer install`
+`docker-compose exec web composer install`
 
 `docker-compose exec web composer req symfony/asset`
 

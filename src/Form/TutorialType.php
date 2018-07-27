@@ -14,6 +14,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+
 
 class TutorialType extends AbstractType
 {
@@ -33,6 +35,13 @@ class TutorialType extends AbstractType
                                     'format' => 'dd/MM/yyyy',))
             
             //->add('user', UserType::class)
+            /*->add('user', ChoiceType::class, array(
+                            'choices'  => array(
+                                'Maybe' => null,
+                                 'Yes' => true,
+                                 'No' => false,
+                                )
+                            ))*/
             /*->add('user', EntityType::class, [
                     'class' => User::class,
                     'choice_label' => 'firstname',
