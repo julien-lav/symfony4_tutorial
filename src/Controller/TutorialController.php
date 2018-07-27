@@ -46,8 +46,9 @@ class TutorialController extends Controller
     public function tutorials(Request $request, TutorialRepository $tutorialRepository)
     {
         $em = $this->getDoctrine()->getManager();
-        $tutorials = $em->getRepository(Tutorial::class)->findAll();
 
+        $tutorials = $em->getRepository(Tutorial::class)->findAll();
+        
         return $this->render('tutorial/list.html.twig', array(
             'tutorials'=> $tutorials,
         ));

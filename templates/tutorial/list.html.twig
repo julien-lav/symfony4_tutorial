@@ -6,14 +6,18 @@
 {% block body %}
 
 
-	<ul class="container">
+	<div class="container">
+		
 		{% for tutorial in tutorials %}
-		        <li>{{ tutorial.title }}</li>
-		        <li>{{ tutorial.link }}</li>
-				
-				<iframe width="560" height="315" src="{{ tutorial.link }}?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+			<span  style="float: left; margin-left: 15px;">
+			        <p>{{ tutorial.title }}</p>
+			        <p>{{ tutorial.link }}</p>
+					
+					<iframe width="560" height="315" src="{{ tutorial.link }}?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
+
+			</span>
 		{% endfor %}
-	</ul>
+	</div>
 
 {% endblock %}
