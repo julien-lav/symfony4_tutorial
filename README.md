@@ -10,16 +10,18 @@ docker-compose exec web composer req symfony/asset
 
 docker-compose exec web php bin/console asset:install
 
+### Arboresence
+'''
 public/assets
          |---css/main.css
          |---css/materialize.min.css
          |---js/main.js
          |---js/materialize.min.js
          |---images/
+'''
+ 
 
-
-
-<div>
+'''
 #templates/base.html.twig
     {% extends 'base.html.twig' %}
     {% block title %}Hello {{ controller_name }}!{% endblock %}
@@ -43,4 +45,4 @@ public/assets
             </ul>
         </div>
     {% endblock %}
-</div>
+'''
