@@ -14,10 +14,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
-
-
-
 
 class UserController extends Controller
 {
@@ -74,24 +70,4 @@ class UserController extends Controller
         }
             die('No profile found');
      }
-
-    /**
-     * @Route("/user/delete/{id}", name="user_delete")
-     * Method({"DELETE"})
-     */    
-    public function delete(Request $request, UserRepository $userRepository, int $id) 
-    {
-            $user = $userRepository->find($id);
-
-            $em = $this->getDoctrine()->getManager();
-            $em ->remove($user);
-            $em ->flush();
-           
-
-            return $this->redirect($this->generateUrl('user_list'));
-        // return $this->redirect($this->generateUrl('users_list'));     
-        // Si on utilise le return directement, on peut se passer de $response 
-        // et donc de son --> use Symfony\Flex\Response;
-    }
-
 }

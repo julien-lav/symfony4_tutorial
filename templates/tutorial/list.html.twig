@@ -8,19 +8,20 @@
 	<br />
 
 	<div class="container">
-
-		<div class="input-field col s12">
-		    <select>
-				<option value="" disabled selected>Choose your option</option>
-				<option value="1">Symfony</option>
-				<option value="2">React/Vue.js</option>
-				<option value="3">Php</option>
-				<option value="4">Javascript</option>
-				<option value="5">Html/CSS</option>
-		    </select>
-		    <label>Select a category</label>
+		<div class="row">
+			<div class="input-field col s5">
+			    <select>
+					<option value="" disabled selected>Select a category</option>
+					<option value="1">Symfony</option>
+					<option value="2">React/Vue.js</option>
+					<option value="3">Php</option>
+					<option value="4">Javascript</option>
+					<option value="5">Html/CSS</option>
+			    </select>
+			    <label>Choose your option</label>
+			</div>
 		</div>
-
+		
 		<br />
 		
 		{% for tutorial in tutorials %}

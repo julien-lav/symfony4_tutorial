@@ -13,7 +13,7 @@ Edit `.env` the line with `DATABASE_URL=mysql://root:root@database:3306/mydataba
 
 `docker-compose exec web php bin/console asset:install`
 
-we can get rid of the "docker-compose exec web" in entering the docker bash
+We can get rid of the "docker-compose exec web" in entering the docker bash
 
 `docker-compose exec web bash` so now you can type directly php bin/console <ANYTHING>
     
@@ -28,6 +28,17 @@ public/assets
          |---images/
 ```
  
+
+in vendor/symfony/twig-bridge/Resources/views/Form
+copy/past: materialyze_layout.html.twg
+
+### config/package/twig.yaml
+```
+twig:
+  form_themes:
+    - 'materialize_layout.html.twig'
+```
+
 ### We link all this
 ```
 #templates/base.html.twig
@@ -63,7 +74,7 @@ public/assets
 ```
 
 
-#### So thanks to UserRepository this :
+#### So thanks to UserRepository, this :
 ```
 public function delete(Request $request, int $id) 
     {
@@ -74,10 +85,13 @@ public function delete(Request $request, int $id)
             ...
 ```
 
-#### Become this :
+#### Becomes this :
 ```
 public function delete(Request $request, UserRepository $userRepository, int $id) 
     {
             $user = $userRepository->find($id);
             ...
 ```
+
+`composer require symfony/security`
+`composer require symfony/security-bundle`
