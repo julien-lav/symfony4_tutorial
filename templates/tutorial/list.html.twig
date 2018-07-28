@@ -5,6 +5,7 @@
 {% block title %} All the videos !{% endblock %}
 {% block body %}
 
+	<br />
 
 	<div class="container">
 
@@ -17,16 +18,18 @@
 				<option value="4">Javascript</option>
 				<option value="5">Html/CSS</option>
 		    </select>
-		    <label>Materialize Select</label>
+		    <label>Select a category</label>
 		</div>
+
+		<br />
 		
 		{% for tutorial in tutorials %}
 			<span  style="float: left; margin-left: 15px;">
+
 			        <p>{{ tutorial.title }}</p>
 			        <p>{{ tutorial.link }}</p>
 					
 					<iframe width="560" height="315" src="{{ tutorial.link }}?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-
 
 			</span>
 		{% endfor %}

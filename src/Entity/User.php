@@ -63,7 +63,7 @@ class User implements UserInterface
     //private $tutorial;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Tutorial", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="App\Entity\Tutorial", mappedBy="user", cascade={"persist", "remove"})
      */
     private $tutorials;
 

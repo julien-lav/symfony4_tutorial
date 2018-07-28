@@ -13,6 +13,11 @@ Edit `.env` the line with `DATABASE_URL=mysql://root:root@database:3306/mydataba
 
 `docker-compose exec web php bin/console asset:install`
 
+we can get rid of the "docker-compose exec web" in entering the docker bash
+
+`docker-compose exec web bash` so now you can type directly php bin/console <ANYTHING>
+    
+
 ### Arboresence
 ```
 public/assets
@@ -26,26 +31,57 @@ public/assets
 
 ```
 #templates/base.html.twig
-    {% extends 'base.html.twig' %}
-    {% block title %}Hello {{ controller_name }}!{% endblock %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        <link rel="icon" type="image/x-icon" href="{{ asset('assets/favicon.ico') }}" />
+        <!-- import icons from both materialize and font-awesome-->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+        <!-- Adding Materialize.css -->
+        <link href="{{ asset('assets/css/materialize.min.css') }}" rel="stylesheet"/>
+        <link href="{{ asset('assets/css/main.css') }}" rel="stylesheet"/>
+        {% block stylesheets %}{% endblock %}
+        
 
-    {% block body %}
-        <style>
-            .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-            .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-        </style>
-
-        <div class="example-wrapper">
-            <h1>Hello {{ controller_name }} !</h1>
-
-            This friendly message is coming from:
-            <ul>
-                <li>Your controller at <code><a href="{{ 'src/Controller/HomeController.php'|file_link(0) }}">src/Controller/Controller.php</a></code></li>
-                <li>Your template at <code><a href="{{ 'templates/game/index.html.twig'|file_link(0) }}">templates/home/index.html.twig</a></code></li>
-                <a class="waves-effect waves-light btn">button</a>
-                <a class="waves-effect waves-light btn"><i class="material-icons left">cloud</i>button</a>
-                <a class="waves-effect waves-light btn"><i class="material-icons right">cloud</i>button</a>
-            </ul>
+    </head>
+    <body>
+        <div class="navbar-fixed">
+            ...
         </div>
-    {% endblock %}
+
+
+        {% block body %}{% endblock %}
+       
+        {% block javascripts %}
+            <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+            <script type="text/javascript" src="{{ asset('assets/js/materialize.min.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('assets/js/main.js') }}"></script>
+        {% endblock %}
+    </body>
+</html>
+```
+
+
+
+## So thanks to UserRepository this :
+```
+public function delete(Request $request, int $id) 
+    {
+           $user = $this
+                    ->getDoctrine()
+                    ->getRepository(User::class)
+                    ->find($id);
+            ...
+```
+
+## Become this :
+```
+     public function delete(Request $request, UserRepository $userRepository, int $id) 
+    {
+            $user = $userRepository->find($id);
+            ...
 ```
