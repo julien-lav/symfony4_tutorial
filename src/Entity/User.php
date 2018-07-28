@@ -23,20 +23,20 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $name;
+    private $nickname;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $age;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", nullable=true)
      */
     private $active;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
      */
     private $createdAt;
 
@@ -46,7 +46,7 @@ class User implements UserInterface
     private $firstname;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=25)
      */
     private $lastname;
 
@@ -60,10 +60,7 @@ class User implements UserInterface
      */
     private $birthday;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Tutorial", mappedBy="user")
-     */
-    private $tutorial;
+    //private $tutorial;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Tutorial", mappedBy="user")
@@ -91,14 +88,14 @@ class User implements UserInterface
         return $this->id;
     }
 
-    public function getName(): ?string
+    public function getNickName(): ?string
     {
-        return $this->name;
+        return $this->nickname;
     }
 
-    public function setName(string $name): self
+    public function setNickName(string $nickname): self
     {
-        $this->name = $name;
+        $this->nickname = $nickname;
 
         return $this;
     }

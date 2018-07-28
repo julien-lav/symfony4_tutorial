@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+{% block title %}Author{% endblock %}
+
+{% block body %}
+	
+
+<br />
+<div class="container">
+	<h1>{{ user.firstname }}</h1>
+
+		{% for tutorial in user.tutorials %}
+			<p>{{ tutorial.title }}</p>
+
+		{% endfor %}
+</div>
+
+{% endblock %}

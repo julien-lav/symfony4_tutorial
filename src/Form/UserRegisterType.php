@@ -6,22 +6,28 @@ use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class UserRegisterType extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder , array $options )
     {
         $builder
-            ->add('name')
-            ->add('age')
-            ->add('active')
-            ->add('createdAt')
+            ->add('nickname')
             ->add('firstname')
             ->add('lastname')
-            ->add('email')
-            ->add('birthday')
-            ->add('roles')
-            ->add('password')
+            ->add('email', EmailType:: class)
+            //->add( 'birthday', BirthdayType:: class)
+            ->add( 'password', RepeatedType:: class, array(
+                'type' => PasswordType:: class,
+                'first_options' => array('label' => 'Password'),
+                'second_options' => array('label' => 'Repeat Password'),
+                ))
+            ->add( 'submit', SubmitType:: class)
         ;
     }
 

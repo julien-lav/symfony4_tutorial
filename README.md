@@ -1,7 +1,7 @@
 
 ### Connexion to the database
 
-Edit `.env` the line with `DATABASE_URL=mysql://root:root@database:3306/mydatabase`.
+Edit `.env` the line with `DATABASE_URL=mysql://root:root@database:3306/mydatabase`
 
 `docker rm $(docker ps -aq)`
 

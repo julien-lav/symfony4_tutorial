@@ -32,6 +32,9 @@ class TutorialController extends Controller
     		$em = $this->getDoctrine()->getManager();
     		$em->persist($tutorial);
     		$em->flush();
+
+            return $this->redirectToRoute('tutorials');
+
     	}
 
     	return $this->render('tutorial/index.html.twig', array(

@@ -28,12 +28,12 @@ class Tutorial
     private $content;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, unique=true)
      */
     private $link;
 
     /**
-     * @ORM\Column(type="datetime", nullable=true, unique=true)
+     * @ORM\Column(type="datetime", nullable=true)
      */
     private $createdAt;
 

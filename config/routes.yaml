@@ -1,6 +1,11 @@
 index:
     path: /
     controller: App\Controller\HomeController::index
+
 contact:
     path: /contact
     controller: App\Controller\HomeController::contact
+
+logout:
+    path: /logout
+    

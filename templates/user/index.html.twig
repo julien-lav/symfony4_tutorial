@@ -2,6 +2,17 @@
 {% block title %}List of our authors{% endblock %}
 
 {% block body %}
-	user list
+	
+<br />
+
+
+
+<div class="container">
+	<h1>List of all users</h1>
+	{% for user in users %}
+		<p>{{ user.firstname }}</p>
+
+	{% endfor %}
+</div>
 
 {% endblock %}

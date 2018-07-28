@@ -12,6 +12,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Symfony\Component\Security\Core\User\UserInterface;
+
 
 
 class UserController extends Controller
@@ -24,12 +26,16 @@ class UserController extends Controller
             'controller_name' => 'Users list',
         ]);
     }
-
+    /**
+     * @Route("/user/list", name="user_list")
+     */
     public function list(Request $request , UserRepository $userRepository)
     {
         $users = $userRepository->findAll();
-    	return $this->render('user/list.html.twig', [
+    	
+        return $this->render('user/index.html.twig', [
             'controller_name' => 'Contact',
+            'users' => $users,
         ]);
     }
 
@@ -46,7 +52,24 @@ class UserController extends Controller
                 'user'=> $user,
             ]);
         }
-            die('ici pour le moment !');
+            die("User doesn't exist");
+     }
+
+    /**
+     * @Route("/profile", name="profile")
+     */
+    public function profile(Request $request, UserRepository $userRepository, UserInterface $user)
+    {
+
+        $userId = $user->getId();
+        $user = $userRepository->find($user);
+
+        if($user) {
+            return $this->render('profile/profile.html.twig',[
+                'user'=> $user,
+            ]);
+        }
+            die('No profile found');
      }
 
 }
