@@ -31,7 +31,7 @@ public/assets
 
 in vendor/symfony/twig-bridge/Resources/views/Form
 
-copy/past: materialyze_layout.html.twg
+    - copy/past: materialize_layout.html.twg
 
 ### config/package/twig.yaml
 ```
