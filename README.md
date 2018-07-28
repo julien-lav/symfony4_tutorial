@@ -1,9 +1,9 @@
 
-### Connexion to the database
+### Connexion to the database & run the docker-compose.yml
 
 Edit `.env` the line with `DATABASE_URL=mysql://root:root@database:3306/mydatabase`
 
-`docker rm $(docker ps -aq)`
+`docker rm $(docker ps -aq)` 
 
 `docker-compose up -d`
 
@@ -28,7 +28,7 @@ public/assets
          |---images/
 ```
  
-
+### We link all this
 ```
 #templates/base.html.twig
 <!DOCTYPE html>
@@ -45,8 +45,6 @@ public/assets
         <link href="{{ asset('assets/css/materialize.min.css') }}" rel="stylesheet"/>
         <link href="{{ asset('assets/css/main.css') }}" rel="stylesheet"/>
         {% block stylesheets %}{% endblock %}
-        
-
     </head>
     <body>
         <div class="navbar-fixed">
@@ -66,8 +64,7 @@ public/assets
 ```
 
 
-
-## So thanks to UserRepository this :
+#### So thanks to UserRepository this :
 ```
 public function delete(Request $request, int $id) 
     {
@@ -78,7 +75,7 @@ public function delete(Request $request, int $id)
             ...
 ```
 
-## Become this :
+#### Become this :
 ```
      public function delete(Request $request, UserRepository $userRepository, int $id) 
     {
