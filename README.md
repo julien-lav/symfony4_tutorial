@@ -30,6 +30,7 @@ public/assets
  
 
 in vendor/symfony/twig-bridge/Resources/views/Form
+
 copy/past: materialyze_layout.html.twg
 
 ### config/package/twig.yaml
@@ -94,4 +95,5 @@ public function delete(Request $request, UserRepository $userRepository, int $id
 ```
 
 `composer require symfony/security`
+
 `composer require symfony/security-bundle`
