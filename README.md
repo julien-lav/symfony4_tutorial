@@ -51,9 +51,8 @@ public/assets
             ...
         </div>
 
-
         {% block body %}{% endblock %}
-       
+
         {% block javascripts %}
             <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
             <script type="text/javascript" src="{{ asset('assets/js/materialize.min.js') }}"></script>
@@ -77,7 +76,7 @@ public function delete(Request $request, int $id)
 
 #### Become this :
 ```
-     public function delete(Request $request, UserRepository $userRepository, int $id) 
+public function delete(Request $request, UserRepository $userRepository, int $id) 
     {
             $user = $userRepository->find($id);
             ...
