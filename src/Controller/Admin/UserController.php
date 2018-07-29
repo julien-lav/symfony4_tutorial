@@ -4,6 +4,8 @@ namespace App\Controller\Admin;
 
 use App\Entity\User;
 use App\Repository\UserRepository;
+use App\Form\UserType;
+use App\Form\AdminUserType;
 
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -15,17 +17,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-
-
-use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\PasswordType;
-use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
-use Symfony\Component\Form\Extension\Core\Type\EmailType;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
-
 
 
 class UserController extends Controller
@@ -89,25 +80,11 @@ class UserController extends Controller
     public function update(Request $request, $id, UserRepository $userRepository, UserPasswordEncoderInterface $passwordEncoder) 
     {
 
-         $user = new User();
-
+        $user = new User();
         $user = $userRepository->find($id);
 
+        $form = $this->createForm(AdminUserType::class, $user);
 
-        $form = $this->createFormBuilder($user)
-                ->add('nickname', TextType::class, array('attr' => array('class' => 'form-control')))
-                //->add('password', RepeatedType::class, array(
-                //    'type' => PasswordType::class,
-                //    'first_options'  => array('label' => 'Password'),
-                //    'second_options' => array('label' => 'Repeat Password'),))
-                ->add('firstname', TextType::class, array('attr' => array('class' => 'form-control')))
-                ->add('lastname', TextType::class, array('attr' => array('class' => 'form-control')))
-                ->add('email', EmailType::class, array('attr' => array('class' => 'form-control')))
-                //->add('dateOfBirth', DateType::class, array('required' =>false, 'placeholder' => 'Select a date', 'attr' => array('class' => 'form-control')))
-                ->add('save', SubmitType::class, array(
-                  'label' => 'Edit an user',
-                  'attr' => array('class' => 'btn btn-primary')))
-                ->getForm();
         $form->handleRequest($request);
        
         if($form->isSubmitted() && $form->isValid()) {
@@ -120,11 +97,10 @@ class UserController extends Controller
             return $this->redirectToRoute('user_list');
         }
         
-        return $this->render('user/new.html.twig', 
+        return $this->render('user/update.html.twig', 
             [
                 'form' => $form->createView(),
                 'id' => $id,
             ]);
     }
-
 }

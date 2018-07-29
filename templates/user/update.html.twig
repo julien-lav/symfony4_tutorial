@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+{% block title %}Update an user{% endblock %}
+
+{% block body %}
+	
+<br />
+
+
+<div class="container">
+	<h1>Update user</h1>
+		
+		{{ form_start(form) }}
+		{{ form_row(form.nickname) }}
+		{{ form_row(form.firstname) }}
+		{{ form_row(form.lastname) }}
+		{{ form_row(form.email) }}
+		{#
+		{{ form_row(form.birthday) }}
+		
+		{{ form_row(form.password.first) }}
+		{{ form_row(form.password.second) }}
+		#}
+		{{ form_row(form.submit) }}
+		{{ form_end(form) }}
+
+	<br />
+	<a href="/user/{{id}}">See this user</a>
+	<br />
+	<a href="/admin/user/delete/{{id}}">Delete this user</a>
+
+</div>
+
+{% endblock %}

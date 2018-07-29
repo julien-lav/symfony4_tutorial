@@ -31,8 +31,7 @@ class SecurityController extends Controller
 		$form->handleRequest($request);
 
 		if ($form->isSubmitted() && $form->isValid()) {
-		
-		$password = $passwordEncoder
+			$password = $passwordEncoder
 			->encodePassword($user, $user->getPassword());
 
 		$user->setPassword($password);

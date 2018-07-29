@@ -29,7 +29,7 @@ public/assets
 ```
  
 
-in vendor/symfony/twig-bridge/Resources/views/Form
+In vendor/symfony/twig-bridge/Resources/views/Form
 
     - copy/past: materialize_layout.html.twg
 
