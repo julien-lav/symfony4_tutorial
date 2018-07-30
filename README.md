@@ -146,7 +146,6 @@ services:
     App\Twig\AppExtension:
         public: false
         tags: ['twig.extension']
-*/
 ```
 
 ```
