@@ -30,7 +30,7 @@
 			        <p>{{ tutorial.title }}</p>
 			        <p>{{ tutorial.link }}</p>
 					
-					<iframe width="560" height="315" src="{{ tutorial.link }}?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+					<iframe width="560" height="315" src="{{ tutorial.link|embed(tutorial.link) }}?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
 			</span>
 		{% endfor %}
