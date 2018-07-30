@@ -106,7 +106,7 @@ public function delete(Request $request, UserRepository $userRepository, int $id
 
 ## Building a filter
 
-#### Add an url to embed filter
+#### Add an url/embed filter
 
 `composer require twig/extensions`
 
