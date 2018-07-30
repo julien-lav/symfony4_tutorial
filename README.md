@@ -97,3 +97,52 @@ public function delete(Request $request, UserRepository $userRepository, int $id
 `composer require symfony/security`
 
 `composer require symfony/security-bundle`
+
+
+#### Add an url to embed filter
+
+`composer require twig/extensions`
+
+
+
+```
+// src/Twig/AppExtension.php
+
+<?php
+
+namespace App\Twig;
+
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFilter;
+
+class AppExtension extends AbstractExtension
+{
+    public function getFilters()
+    {
+        return array(
+            new TwigFilter('embed', array($this, 'embedFilter')),
+        );
+    }
+    public function embedFilter($string)
+    {
+        $cutMe = 'watch?v=';
+        $orMe = 'youtu.be';
+        $newString = str_replace($cutMe, "embed/", $string);    
+        $resultString = str_replace($orMe, "www.youtube.com/embed", $newString);
+        return $resultString;
+    }
+}
+```
+
+```
+# config/services.yaml
+services:
+    App\Twig\AppExtension:
+        public: false
+        tags: ['twig.extension']
+*/
+```
+
+```
+{{ tutorial.link|embed(tutorial.link) }}
+```
