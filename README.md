@@ -1,5 +1,5 @@
 
-### Connexion to the database & run the docker-compose.yml
+## Connexion to the database & run the docker-compose.yml
 
 Edit `.env` the line with `DATABASE_URL=mysql://root:root@database:3306/mydatabase`
 
@@ -17,6 +17,7 @@ We can get rid of the "docker-compose exec web" in entering the docker bash
 
 `docker-compose exec web bash` so now you can type directly php bin/console <ANYTHING>
     
+## Adding Materialize
 
 ### Arboresence
 ```
@@ -74,6 +75,7 @@ twig:
 </html>
 ```
 
+## Use of UserRepository
 
 #### So thanks to UserRepository, this :
 ```
@@ -94,15 +96,19 @@ public function delete(Request $request, UserRepository $userRepository, int $id
             ...
 ```
 
+
+## SecurityController
+
 `composer require symfony/security`
 
 `composer require symfony/security-bundle`
 
 
+## Building a filter
+
 #### Add an url to embed filter
 
 `composer require twig/extensions`
-
 
 
 ```
