@@ -7,6 +7,10 @@ Edit `.env` the line with `DATABASE_URL=mysql://root:root@database:3306/mydataba
 
 `docker-compose up -d`
 
+if you need to stop `docker-compose down`
+
+#### Composer install 
+
 `docker-compose exec web composer install`
 
 `docker-compose exec web composer req symfony/asset`
@@ -31,8 +35,9 @@ public/assets
  
 
 In vendor/symfony/twig-bridge/Resources/views/Form
-
     - copy/past: materialize_layout.html.twg
+You'll find it here : 
+    - https://gist.github.com/JusteLeblanc/da4d2100fc966e0962e5f50daf9333f9
 
 ### config/package/twig.yaml
 ```
