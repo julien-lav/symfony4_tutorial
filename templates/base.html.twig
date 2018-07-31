@@ -12,14 +12,12 @@
         <link href="{{ asset('assets/css/materialize.min.css') }}" rel="stylesheet"/>
   		<link href="{{ asset('assets/css/main.css') }}" rel="stylesheet"/>
         {% block stylesheets %}{% endblock %}
-        
-
     </head>
     <body>
     	<div class="navbar-fixed">
 		    <nav>
 				<div class="nav-wrapper">
-				<a href="/" class="brand-logo">&nbsp;Symfony 4</a>
+				<a href="/" class="brand-logo" style="padding-left:50px;">Daily Tutorial</a>
 					<ul class="right hide-on-med-and-down">
 
 						{% if is_granted( 'IS_AUTHENTICATED_FULLY') %}
@@ -33,29 +31,39 @@
 						<li><a href="/login">Login</a></li>
 						<li><a href="/register">Sign In</a></li>						
 						
-						{% endif %}
-												
+						{% endif %}									
 
 						<li><a href="/contact">Contact</a></li>
 						
-						<li><a href="https://github.com/julien-lav/symfony4_tutorial">Github <i class="fa fa-github"></i></a></li>
+						<li style="padding-right:50px;"><a href="https://github.com/julien-lav/symfony4_tutorial">Github&nbsp;<i class="fa fa-github"></i></a></li>
 					</ul>
 				</div>
 		    </nav>
 		 </div>
 
-		 <div class="container">
-		 		{% if is_granted( 'IS_AUTHENTICATED_FULLY') %}
+        {% block body %}
 
-				{% endif %}
-		 </div>
+        {% endblock %}
+	
+           <div class="fixed-action-btn">
+  <a class="btn-floating btn-large red">
+    <i class="large material-icons">mode_edit</i>
+  </a>
+  <ul>
+    <li><a class="btn-floating red"><i class="material-icons">insert_chart</i></a></li>
+    <li><a class="btn-floating yellow darken-1"><i class="material-icons">format_quote</i></a></li>
+    <li><a class="btn-floating green"><i class="material-icons">publish</i></a></li>
+    <li><a class="btn-floating blue"><i class="material-icons">attach_file</i></a></li>
+  </ul>
+</div>
 
-        {% block body %}{% endblock %}
-       
+      
         {% block javascripts %}
         	<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
   			<script type="text/javascript" src="{{ asset('assets/js/materialize.min.js') }}"></script>
   			<script type="text/javascript" src="{{ asset('assets/js/main.js') }}"></script>
+			<script type="text/javascript">$('.fixed-action-btn').floatingActionButton();</script>
         {% endblock %}
     </body>
+
 </html>

@@ -52,28 +52,6 @@ class UserController extends Controller
     // }
 
     /**
-     * @Route("/profile/delete", name="profile_delete")
-     */
-    public function profileDelete(Request $request, UserRepository $userRepository, UserInterface $user)
-    {
-
-        $userId = $user->getId();
-        $user = $userRepository->find($user);
-
-        if($user) {
-            $em = $this->getDoctrine()->getManager();
-            $em ->remove($user);
-            $em ->flush();
-
-            return $this->render('profile/goodbye.html.twig',[
-                'user'=> $user,
-            ]);
-        }
-            die('No profile found');
-     }
-
-
-    /**
      * @Route("admin/user/edit/{id}", name="edit_user")
      */
     public function update(Request $request, $id, UserRepository $userRepository, UserPasswordEncoderInterface $passwordEncoder) 
@@ -102,4 +80,25 @@ class UserController extends Controller
                 'id' => $id,
             ]);
     }
+
+    /**
+     * @Route("/profile/delete", name="profile_delete")
+     */
+    public function profileDelete(Request $request, UserRepository $userRepository, UserInterface $user)
+    {
+
+        $userId = $user->getId();
+        $user = $userRepository->find($user);
+
+        if($user) {
+            $em = $this->getDoctrine()->getManager();
+            $em ->remove($user);
+            $em ->flush();
+
+            return $this->render('profile/goodbye.html.twig',[
+                'user'=> $user,
+            ]);
+        }
+            die('No profile found');
+     }
 }

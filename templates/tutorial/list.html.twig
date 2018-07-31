@@ -30,11 +30,12 @@
 		{% for tutorial in tutorials %}
 			<span  style="float: left; margin-left: 15px;" class="filter-{{tutorial.category.id}} item">
 
-			        <h2>{{ tutorial.title }}</h2>
+			        <h2>{{ tutorial.title|capitalize }}</h2>
 
 			        <p><a href="{{ tutorial.link|replace({'embed/':'watch?v='}) }}">Direct link</a> - 
 
-						{# I really need to find out hiw to change this #}
+						{# I really need to find out how to change this #}
+				        
 				        {% if tutorial.category.id == '6' %}
 							Other
 				        {% elseif tutorial.category.id == '5' %}
@@ -58,10 +59,11 @@
 	</div>
 
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-    	
+
 	<script type="text/javascript">
 
-		$('#filter-criteria').add('#filter-select').add('#filter-select2').on('keyup change', function() {
+		$('#filter-criteria')
+			.add('#filter-select').add('#filter-select2').on('keyup change', function() {
 		    $('.item').hide();
 
 		    var txt = $('#filter-criteria').val();
@@ -78,6 +80,8 @@
 		        }
 		    });
 		});
+
+		/* source : https://codepen.io/munfactory/pen/QmmWRg no need to reinvent the wheel */
 
 	</script>
 

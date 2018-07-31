@@ -21,7 +21,7 @@ class TutorialController extends Controller
 {
 
 	/**
-     * @Route("/tutorial", name="tutorial")
+     * @Route("/profile/tutorial", name="tutorial")
      */
     public function tutorial(Request $request, TutorialRepository $tutorialRepository)
     {
@@ -53,7 +53,8 @@ class TutorialController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $tutorials = $em->getRepository(Tutorial::class)->findAll();
-        //$categoryName = $em->getRepository(Category::class)->findAll();
+        // Need to go deeper here !
+        // $categoryName = $em->getRepository(Category::class)->findAll();
         
         return $this->render('tutorial/list.html.twig', array(
             'tutorials'=> $tutorials,
