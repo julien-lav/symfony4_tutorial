@@ -160,5 +160,6 @@ Now in the <iframe> we have to filter the url in order to link the video
 {{ tutorial.link|embed(tutorial.link) }}
 ```
 
-And in our < a href=" {{ tutorial.link|replace({'embed/':'watch?v='}) }} " > direct link < /a >
 On the otherside the user could have copy/past the embed version of our link, so we simply filter that using replace {{ tutorial.link|replace({'embed/':'watch?v='}) }}   
+
+So there it is =>  a href="{{ tutorial.link|replace({'embed/':'watch?v='}) }}"
