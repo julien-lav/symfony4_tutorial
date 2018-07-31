@@ -9,27 +9,47 @@
 
 	<div class="container">
 		<div class="row">
+			<input type="search" id="filter-criteria" style="visibility: hidden;">
 			<div class="input-field col s5">
-			    <select>
-					<option value="" disabled selected>Select a category</option>
-					<option value="1">Symfony</option>
-					<option value="2">React/Vue.js</option>
-					<option value="3">Php</option>
-					<option value="4">Javascript</option>
-					<option value="5">Html/CSS</option>
+			    <select id="filter-select">
+					<option value="all" disabled selected>Select a language/framework</option>
+					<option value="all">All</option>
+					<option value="filter-1">Symfony</option>
+					<option value="filter-2">React/Vue.js</option>
+					<option value="filter-3">Php</option>
+					<option value="filter-4">Javascript</option>
+					<option value="filter-5">Html/CSS</option>
+					<option value="filter-6">Other</option>
 			    </select>
-			    <label>Choose your option</label>
+			    <label>Filter by category</label>
 			</div>
 		</div>
 		
 		<br />
 		
 		{% for tutorial in tutorials %}
-			<span  style="float: left; margin-left: 15px;">
+			<span  style="float: left; margin-left: 15px;" class="filter-{{tutorial.category.id}} item">
 
 			        <h2>{{ tutorial.title }}</h2>
 
-			        <p><a href="{{ tutorial.link|replace({'embed/':'watch?v='}) }}">Direct link</a></p>
+			        <p><a href="{{ tutorial.link|replace({'embed/':'watch?v='}) }}">Direct link</a> - 
+
+						{# I really need to find out hiw to change this #}
+				        {% if tutorial.category.id == '6' %}
+							Other
+				        {% elseif tutorial.category.id == '5' %}
+				      		Html/CSS
+				        {% elseif tutorial.category.id == '4' %}
+				        	Javascript
+				        {% elseif tutorial.category.id == '3' %}
+				        	Php
+				        {% elseif tutorial.category.id == '2' %}
+				        	React/Vue.js
+				        {% elseif tutorial.category.id == '1' %}
+				        	Symfony
+				        {% endif %}
+
+			    	</p> 
 					
 					<iframe width="560" height="315" src="{{ tutorial.link|embed(tutorial.link) }}?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
@@ -37,4 +57,30 @@
 		{% endfor %}
 	</div>
 
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    	
+	<script type="text/javascript">
+
+		$('#filter-criteria').add('#filter-select').add('#filter-select2').on('keyup change', function() {
+		    $('.item').hide();
+
+		    var txt = $('#filter-criteria').val();
+		    var select = $('#filter-select').val();
+		       
+		    select = select == "all" ? "item" : select;
+		    
+		    txt = txt == "" ? "item" : txt;
+		    $('.item').each(function() {
+		        var $this = $(this)
+		        if ($this.is('[class*=' + txt + ']') && $this.is('[class*=' + select + ']'))
+		        {
+		            $this.show();
+		        }
+		    });
+		});
+
+	</script>
+
+
 {% endblock %}
+

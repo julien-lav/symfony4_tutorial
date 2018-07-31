@@ -21,7 +21,6 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class UserController extends Controller
 {
-
     /**
      * @Route("/admin/user/delete/{id}", name="user_delete")
      * Method({"DELETE"})

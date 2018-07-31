@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Entity\Tutorial;
+use App\Entity\Category;
+
 
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -51,9 +53,11 @@ class TutorialController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $tutorials = $em->getRepository(Tutorial::class)->findAll();
+        //$categoryName = $em->getRepository(Category::class)->findAll();
         
         return $this->render('tutorial/list.html.twig', array(
             'tutorials'=> $tutorials,
+            //'categoryName' => $categoryName,
         ));
     }
 }
