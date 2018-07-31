@@ -113,9 +113,9 @@ public function delete(Request $request, UserRepository $userRepository, int $id
 ## Building a filter
 
 #### Add an url/embed filter
+We need to do it so because users may introduce different kinds of link, so we have to treat them all.
 
 `composer require twig/extensions`
-
 
 ```
 // src/Twig/AppExtension.php
@@ -154,6 +154,11 @@ services:
         tags: ['twig.extension']
 ```
 
+Now in the <iframe> we have to filter the url in order to link the video
+ 
 ```
 {{ tutorial.link|embed(tutorial.link) }}
 ```
+
+And in our <a href=" {{ tutorial.link|replace({'embed/':'watch?v='}) }} ">direct link</a>
+On the otherside the user could have copy/past the embed version of our link, so we simply filter that using replace {{ tutorial.link|replace({'embed/':'watch?v='}) }}   
