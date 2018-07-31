@@ -8,7 +8,11 @@
 <div class="container">
 	<h1>{{ user.nickname }}</h1>
 
-		<p>{{ user.firstname }}, {{ user.lastname }}</p>
+		<p>
+			{% if (user.firstname != null) %}
+				{{ user.firstname }}, {{ user.lastname }}
+			{% endif %}	
+		</p>
 		<p>My tutorial list :</p>
 
 		

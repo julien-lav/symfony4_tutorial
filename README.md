@@ -163,3 +163,17 @@ Now in the <iframe> we have to filter the url in order to link the video
 On the otherside the user could have copy/past the embed version of our link, so we simply filter that using replace {{ tutorial.link|replace({'embed/':'watch?v='}) }}   
 
 So there it is =>  a href="{{ tutorial.link|replace({'embed/':'watch?v='}) }}"
+
+--------
+
+### Role hierarchy
+
+We want our ADMIN to also have access to the same content as our logged users, so in security.yaml we add the following code :
+
+```
+# config/packages/security.yaml
+security:
+    # ...
+    role_hierarchy:
+        ROLE_ADMIN:       ROLE_USER
+```
