@@ -56,7 +56,6 @@ class UserController extends Controller
      */
     public function update(Request $request, int $id, UserRepository $userRepository, UserPasswordEncoderInterface $passwordEncoder) 
     {
-
         $user = new User();
         $user = $userRepository->find($id);
 
