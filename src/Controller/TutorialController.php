@@ -17,6 +17,11 @@ use App\Repository\TutorialRepository;
 
 use Symfony\Component\HttpFoundation\Request;
 
+use Symfony\Component\Security\Core\User\UserInterface;
+
+use App\Form\AdminTutorialType;
+
+
 class TutorialController extends Controller
 {
 
@@ -65,33 +70,33 @@ class TutorialController extends Controller
     /**
      * @Route("profile/tutorial/edit/{id}", name="edit_tutorial")
      */
-    public function update(Request $request, int $id, TutorialRepository $tutorialRepository, UserRepository $userRepository) 
+    public function update(Request $request, int $id, TutorialRepository $tutorialRepository, UserInterface $user) 
     {
-        /**//**//**//* 
-        need to find a fix to prevent users 
-        from updating tutorials not own by themself   
-        *//**//**//*
 
         $tutorial = new Tutorial();
-
         $tutorial = $tutorialRepository->find($id);
 
-        $form = $this->createForm(AdminTutorialType::class, $tutorial);
+        if($user->getId() === $tutorial->getUser()->getId()) {
 
-        $form->handleRequest($request);
-       
-        if($form->isSubmitted() && $form->isValid()) {
-         
-            $em = $this->getDoctrine()->getManager();
-            $em->flush();
+            $form = $this->createForm(AdminTutorialType::class, $tutorial);
 
-            return $this->redirectToRoute('tutorials');
+            $form->handleRequest($request);
+           
+            if($form->isSubmitted() && $form->isValid()) {
+             
+                $em = $this->getDoctrine()->getManager();
+                $em->flush();
+                return $this->redirectToRoute('tutorials');
+            }
         }
-        
+        else {
+            die('What are you tryin\' to do ?');
+        }
+
         return $this->render('tutorial/update.html.twig', 
             [
                 'form' => $form->createView(),
                 'id' => $id,
-            ]);*/
+            ]);
     }
 }

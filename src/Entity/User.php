@@ -183,7 +183,7 @@ class User implements UserInterface
 
         return $this;
     }
-
+    /*
     public function getTutorial(): ?Tutorial
     {
         return $this->tutorial;
@@ -195,7 +195,7 @@ class User implements UserInterface
 
         return $this;
     }
-
+    */
     /**
      * @return Collection|Tutorial[]
      */

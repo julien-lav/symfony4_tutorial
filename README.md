@@ -7,7 +7,7 @@ Edit `.env` the line with `DATABASE_URL=mysql://root:root@database:3306/mydataba
 
 `docker-compose up -d`
 
-if you need to stop `docker-compose down`
+if you need to stop `docker-compose down` on windows you mau have to reboot docker.
 
 #### Composer install 
 
@@ -119,7 +119,6 @@ We need to do it so because users may introduce different kinds of link, so we h
 
 ```
 // src/Twig/AppExtension.php
-
 <?php
 
 namespace App\Twig;
@@ -180,4 +179,21 @@ security:
 
 ### Javascript confirmation on "delete button"
 
-`<a href="" onclick="return confirm('are u sure?')">Delete</a>`
+`<a href="" onclick="return confirm('are you sure?')">Delete</a>`
+
+## Disable editing a none owned tutorial
+
+If the surrent user id match the tutorial.user.id, then we can update the form
+```
+
+if($user->getId() === $tutorial->getUser()->getId()) {
+
+            $form = $this->createForm(AdminTutorialType::class, $tutorial);
+            $form->handleRequest($request);
+           
+            if($form->isSubmitted() && $form->isValid()) {
+                $em = $this->getDoctrine()->getManager();
+                $em->flush();
+                return $this->redirectToRoute('tutorials');
+            }
+```
