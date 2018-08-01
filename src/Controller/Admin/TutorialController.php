@@ -34,7 +34,7 @@ class TutorialController extends Controller
             $em ->remove($tutorial);
             $em ->flush();
            
-            return $this->redirect($this->generateUrl('user_list'));
+            return $this->redirect($this->generateUrl('tutorials'));
         }
             die('No profile found');
     }
@@ -54,10 +54,10 @@ class TutorialController extends Controller
     /**
      * @Route("admin/tutorial/edit/{id}", name="edit_tutorial")
      */
-    public function update(Request $request, $id, TutorialRepository $tutorialRepository) 
+    public function update(Request $request, int $id, TutorialRepository $tutorialRepository) 
     {
 
-        $tutorial = new User();
+        $tutorial = new Tutorial();
         $tutorial = $tutorialRepository->find($id);
 
         $form = $this->createForm(AdminTutorialType::class, $tutorial);
@@ -69,7 +69,7 @@ class TutorialController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->flush();
 
-            return $this->redirectToRoute('user_list');
+            return $this->redirectToRoute('tutorials');
         }
         
         return $this->render('tutorial/update.html.twig', 

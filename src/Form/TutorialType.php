@@ -4,8 +4,10 @@ namespace App\Form;
 
 use App\Entity\User;
 use App\Entity\Tutorial;
+use App\Entity\Category;
 
 use App\Form\UserType;
+use App\Form\CategoryType;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -13,8 +15,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+
 
 
 class TutorialType extends AbstractType
@@ -34,6 +37,12 @@ class TutorialType extends AbstractType
                                     ],
                                     'format' => 'dd/MM/yyyy',))
             
+            //->add('category', CategoryType::class)
+            ->add('category', EntityType::class,[
+                'class' => Category::class,
+                'choice_label'=> 'name',
+                ])
+
             //->add('user', UserType::class)
             /*->add('user', ChoiceType::class, array(
                             'choices'  => array(

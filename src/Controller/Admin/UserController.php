@@ -14,8 +14,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-use Symfony\Component\Security\Core\User\UserInterface;
 
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 
@@ -54,7 +54,7 @@ class UserController extends Controller
     /**
      * @Route("admin/user/edit/{id}", name="edit_user")
      */
-    public function update(Request $request, $id, UserRepository $userRepository, UserPasswordEncoderInterface $passwordEncoder) 
+    public function update(Request $request, int $id, UserRepository $userRepository, UserPasswordEncoderInterface $passwordEncoder) 
     {
 
         $user = new User();

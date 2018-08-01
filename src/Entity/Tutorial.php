@@ -43,7 +43,7 @@ class Tutorial
     private $user;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="tutorials")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="tutorials", cascade={"persist"})
      */
     private $category;
 
