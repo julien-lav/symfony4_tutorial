@@ -166,7 +166,7 @@ So there it is =>  a href="{{ tutorial.link|replace({'embed/':'watch?v='}) }}"
 
 --------
 
-### Role hierarchy
+## Role hierarchy
 
 We want our ADMIN to also have access to the same content as our logged users, so in security.yaml we add the following code :
 
@@ -177,3 +177,7 @@ security:
     role_hierarchy:
         ROLE_ADMIN:       ROLE_USER
 ```
+
+### Javascript confirmation on "delete button"
+
+`<a href="" onclick="return confirm('are u sure?')">Delete</a>`

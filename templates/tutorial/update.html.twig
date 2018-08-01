@@ -16,7 +16,10 @@
    {{ form_row(form.category.name) }}
    {{ form_row(form.user, {'attr': {'class': 'input-field col s12'}}) }}
 	 #}
-   {{ form_end(form) }}
+   {{ form_end(form) }} 
+
+   <br />
+   <a href="/admin/tutorial/delete/{{id}}" onclick="return confirm('are u sure?')" class="waves-effect waves-light btn" style="background-color: #e53935 !important; letter-spacing: 1.2px;">Delete</a>
 
 </div>
 

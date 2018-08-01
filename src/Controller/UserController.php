@@ -4,6 +4,10 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Repository\UserRepository;
+use App\Repository\TutorialRepository;
+
+use App\Entity\Tutorial;
+use App\Entity\Category;
 
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -13,6 +17,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\Security\Core\User\UserInterface;
+
+use App\Form\TutorialType;
+
+
+
 
 
 class UserController extends Controller
@@ -57,15 +66,20 @@ class UserController extends Controller
     /**
      * @Route("/profile", name="profile")
      */
-    public function profile(Request $request, UserRepository $userRepository, UserInterface $user)
+    public function profile(Request $request, TutorialRepository $tutorialRepository, UserRepository $userRepository, UserInterface $user)
     {
 
         $userId = $user->getId();
         $user = $userRepository->find($user);
 
+        $em = $this->getDoctrine()->getManager();
+        $tutorials = $em->getRepository(Tutorial::class)->findAll();
+        
         if($user) {
             return $this->render('profile/profile.html.twig',[
                 'user'=> $user,
+                'tutorials'=> $tutorials,
+
             ]);
         }
             die('No profile found');

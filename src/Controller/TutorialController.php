@@ -20,6 +20,23 @@ use Symfony\Component\HttpFoundation\Request;
 class TutorialController extends Controller
 {
 
+    /**
+     * @Route("/tutorials", name="tutorials")
+     */
+    public function index(Request $request, TutorialRepository $tutorialRepository)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $tutorials = $em->getRepository(Tutorial::class)->findAll();
+        // Need to go deeper here !
+        // $categoryName = $em->getRepository(Category::class)->findAll();
+        
+        return $this->render('tutorial/list.html.twig', array(
+            'tutorials'=> $tutorials,
+            //'categoryName' => $categoryName,
+        ));
+    }
+
 	/**
      * @Route("/profile/tutorial", name="tutorial")
      */
@@ -46,19 +63,35 @@ class TutorialController extends Controller
     }
 
     /**
-     * @Route("/tutorials", name="tutorials")
+     * @Route("profile/tutorial/edit/{id}", name="edit_tutorial")
      */
-    public function tutorials(Request $request, TutorialRepository $tutorialRepository)
+    public function update(Request $request, int $id, TutorialRepository $tutorialRepository, UserRepository $userRepository) 
     {
-        $em = $this->getDoctrine()->getManager();
+        /**//**//**//* 
+        need to find a fix to prevent users 
+        from updating tutorials not own by themself   
+        *//**//**//*
 
-        $tutorials = $em->getRepository(Tutorial::class)->findAll();
-        // Need to go deeper here !
-        // $categoryName = $em->getRepository(Category::class)->findAll();
+        $tutorial = new Tutorial();
+
+        $tutorial = $tutorialRepository->find($id);
+
+        $form = $this->createForm(AdminTutorialType::class, $tutorial);
+
+        $form->handleRequest($request);
+       
+        if($form->isSubmitted() && $form->isValid()) {
+         
+            $em = $this->getDoctrine()->getManager();
+            $em->flush();
+
+            return $this->redirectToRoute('tutorials');
+        }
         
-        return $this->render('tutorial/list.html.twig', array(
-            'tutorials'=> $tutorials,
-            //'categoryName' => $categoryName,
-        ));
+        return $this->render('tutorial/update.html.twig', 
+            [
+                'form' => $form->createView(),
+                'id' => $id,
+            ]);*/
     }
 }

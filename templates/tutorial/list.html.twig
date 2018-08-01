@@ -19,7 +19,8 @@
 					<option value="filter-3">Php</option>
 					<option value="filter-4">Javascript</option>
 					<option value="filter-5">Html/CSS</option>
-					<option value="filter-6">Other</option>
+					<option value="filter-6">Ruby</option>
+					<option value="filter-7">Other</option>
 			    </select>
 			    <label>Filter by category</label>
 			</div>
@@ -36,8 +37,10 @@
 
 						{# I really need to find out how to change this #}
 				        
-				        {% if tutorial.category.id >= '6' %}
+				        {##}{% if tutorial.category.id >= '7' %}
 							Other
+				        {% elseif tutorial.category.id == '6' %}
+							Ruby				        
 				        {% elseif tutorial.category.id == '5' %}
 				      		Html/CSS
 				        {% elseif tutorial.category.id == '4' %}

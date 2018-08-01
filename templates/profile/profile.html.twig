@@ -13,54 +13,48 @@
 				{{ user.firstname }}, {{ user.lastname }}
 			{% endif %}	
 		</p>
-		<p>My tutorial list :</p>
-
-		
+	
+		<h5>My tutorial list :</h5>
+					
 			<ul class="collection">
-
+				{% if user.tutorials|length == 0 %}
+    			 <p> Nothing added yet, get started ?</p>
+				{% endif %}
 				{% for tutorial in user.tutorials %}
 			    
 			    <li class="collection-item avatar">
-			      <img src="images/yuna.jpg" alt="" class="circle">
+			      <i class="material-icons circle red">play_arrow</i>
 			      <span class="title">Title</span>
 			      <p>{{ tutorial.title }} <br>
 			         {{ tutorial.content }}
 			      </p>
-			      <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+			      <a href="profile/tutorial/edit/{{tutorial.id }}" class="secondary-content"><i class="material-icons">edit</i></a>
 			    </li>
-				
 				{% endfor %}
+			</ul>
 
-			    <li class="collection-item avatar">
-			      <i class="material-icons circle">folder</i>
-			      <span class="title">Title</span>
-			      <p>First Line <br>
-			         Second Line
-			      </p>
-			      <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-			    </li>
-			    <li class="collection-item avatar">
-			      <i class="material-icons circle green">insert_chart</i>
-			      <span class="title">Title</span>
-			      <p>First Line <br>
-			         Second Line
-			      </p>
-			      <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-			    </li>
+
+		{% if is_granted('ROLE_ADMIN') %}
+		<h5>User's tutorial list :</h5>
+			
+			<ul class="collection">
+				{% for tutorial in tutorials %}
+			    
 			    <li class="collection-item avatar">
 			      <i class="material-icons circle red">play_arrow</i>
 			      <span class="title">Title</span>
-			      <p>First Line <br>
-			         Second Line
+			      <p>{{ tutorial.title }} <br>
+			         {{ tutorial.content }}
 			      </p>
-			      <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+			      <a href="admin/tutorial/edit/{{tutorial.id }}" class="secondary-content"><i class="material-icons">edit</i></a>
 			    </li>
-			  </ul>
-			
+				
+				{% endfor %}
+			</ul>
+		{% endif %}
 
-		
 
-	<a href="/profile/delete" style="color:red">delete my account</a>
+	<a href="/profile/delete" onclick="return confirm('Are you sure ?')" style="color:red">delete my account</a>
 		
 </div>
 
