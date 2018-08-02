@@ -47,10 +47,12 @@ class SecurityController extends Controller
 		$logger->info('User registered now !');
  		$this->addFlash( 'notice', 'You\'ve been successfully registered !');
 
+ 		$event = new UserRegisteredEvent($user);
+	 	$eventDispatcher->dispatch(UserRegisteredEvent::NAME,$event);
 
 		//Event trigger
-        $event = new GenericEvent($user);
-        $eventDispatcher->dispatch(Events::USER_REGISTERED, $event);
+        $eventEmail = new GenericEvent($user);
+        $eventDispatcher->dispatch(Events::USER_REGISTERED, $eventEmail);
  
 
 		return $this->redirectToRoute('index');
