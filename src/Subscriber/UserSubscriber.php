@@ -16,14 +16,13 @@ class UserSubscriber implements EventSubscriberInterface
 
 	public static function getSubscribedEvents()
 	{
-		return [
-			UserRegisteredEvent::NAME => 'onUserRegisterdEvent',
-				];
+		return [ UserRegisteredEvent::NAME => 'onUserRegisterdEvent',];
 	}
 
 	public function onUserRegisterdEvent(UserRegisteredEvent $userRegisteredEvent)
 	{
 		$user = $userRegisteredEvent->getUser();
-		// Code here
+		$this->logger->info('user register', ['email'=> $user->getEmail()]);
+    	
 	}
 }
