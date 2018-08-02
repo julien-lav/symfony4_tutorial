@@ -179,11 +179,12 @@ security:
 
 ### Javascript confirmation on "delete button"
 
-`<a href="" onclick="return confirm('are you sure?')">Delete</a>`
+`<a href="" onclick="return confirm('Are you sure?')">Delete</a>`
 
 ## Disable editing a none owned tutorial
 
 If the surrent user id match the tutorial.user.id, then we can update the form
+
 ```
 
 if($user->getId() === $tutorial->getUser()->getId()) {
@@ -196,4 +197,30 @@ if($user->getId() === $tutorial->getUser()->getId()) {
                 $em->flush();
                 return $this->redirectToRoute('tutorials');
             }
+```
+
+
+### Adding the current user id when he add a tutorial
+To do so we once again use this magic tool "UserInterface" 
+
+```
+//src/Controller/TutorailController
+
+public function addTutorial(Request $request, TutorialRepository $tutorialRepository, UserInterface $user)
+{
+...
+if($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+
+            // This get an instance of User, and add the userId to the database, when a tutorial is added 
+            $tutorial->setUser($user);          
+            
+            $em->persist($tutorial);
+            $em->flush();
+
+            return $this->redirectToRoute('tutorials');
+            $this->addFlash('notice','Post added !');       
+        }
+...
+}
 ```

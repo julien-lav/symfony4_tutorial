@@ -1,0 +1,26 @@
+<div class="navbar-fixed">
+    <nav>
+		<div class="nav-wrapper">
+    	  <a href="/" class="brand-logo" style="padding-left:70px;">YouCode</a>
+			<ul class="right hide-on-med-and-down">
+
+				{% if is_granted( 'IS_AUTHENTICATED_FULLY') %}
+
+				<li><a href="/profile"><i class="material-icons right">account_circle</i>{{ app.user.nickname }}</a></li>
+
+				<li><a href="/logout"><i class="material-icons right">lock</i>Logout</a></li>
+
+				{% else %}
+				
+				<li><a href="/login">Login</a></li>
+				<li><a href="/register">Sign In</a></li>						
+				
+				{% endif %}									
+
+				<li><a href="/contact">Contact</a></li>
+				
+				<li style="padding-right:70px;"><a href="https://github.com/julien-lav/symfony4_tutorial">Github&nbsp;<i class="fa fa-github"></i></a></li>
+			</ul>
+		</div>
+    </nav>
+ </div>

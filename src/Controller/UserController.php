@@ -18,7 +18,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\Security\Core\User\UserInterface;
 
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+
 use App\Form\TutorialType;
+use App\Form\AdminUserType;
 
 
 
@@ -26,7 +29,6 @@ use App\Form\TutorialType;
 
 class UserController extends Controller
 {
-
 
     public function index()
     {
@@ -72,7 +74,7 @@ class UserController extends Controller
         $userId = $user->getId();
         $user = $userRepository->find($user);
 
-        $em = $this->getDoctrine()->getManager();
+        $em = $this->getDoctrine()->getManager();        
         $tutorials = $em->getRepository(Tutorial::class)->findAll();
         
         if($user) {
@@ -84,4 +86,39 @@ class UserController extends Controller
         }
             die('No profile found');
      }
+
+
+    /**
+     * @Route("profile/user/edit/{id}", name="user_edit_user")
+     */
+    public function update(Request $request, int $id,  UserRepository $userRepository, UserInterface $user, UserPasswordEncoderInterface $passwordEncoder) 
+    {
+        $pageUser = new User();
+        $pageUser = $userRepository->find($id);
+
+        if($user->getId() === $id) {
+
+            $form = $this->createForm(AdminUserType::class, $user);
+
+             $form->handleRequest($request);
+       
+            if($form->isSubmitted() && $form->isValid()) {
+                $password = $passwordEncoder->encodePassword($user, $user->getPassword());
+                $user->setPassword($password);
+                $em = $this->getDoctrine()->getManager();
+                $em->flush();
+
+                return $this->redirectToRoute('profile');
+            }   
+        } else {
+            die('What are you tryin\' to do ?');
+
+        }
+
+        return $this->render('user/update.html.twig', 
+            [
+                'form' => $form->createView(),
+                'id' => $id,
+            ]);
+    }
 }

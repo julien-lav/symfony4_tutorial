@@ -9,7 +9,13 @@
 <div class="container">
 	<h1>List of all users</h1>
 	{% for user in users %}
-		<p>{{ user.firstname }}</p>
+		<p>{{ user.firstname }}  | {% if (is_granted( 'ROLE_ADMIN') and (user.id != 22)) %}
+		
+		<a href="/admin/user/edit/{{user.id}}">edit this user</a> |
+										
+		<a href="/admin/user/delete/{{user.id}}" style="color: red;">delete this user</a>
+		
+		{% endif %}	</p>
 
 	{% endfor %}
 </div>

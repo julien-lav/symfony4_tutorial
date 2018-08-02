@@ -10,60 +10,59 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
         <!-- Adding Materialize.css -->
         <link href="{{ asset('assets/css/materialize.min.css') }}" rel="stylesheet"/>
-  		<link href="{{ asset('assets/css/main.css') }}" rel="stylesheet"/>
+  		  <link href="{{ asset('assets/css/main.css') }}" rel="stylesheet"/>
         {% block stylesheets %}{% endblock %}
     </head>
     <body>
-    	<div class="navbar-fixed">
-		    <nav>
-				<div class="nav-wrapper">
-        <a href="/" class="brand-logo" style="padding-left:70px;">YouCode</a>
-					<ul class="right hide-on-med-and-down">
+    {% include 'design/header.html.twig' %}
 
-						{% if is_granted( 'IS_AUTHENTICATED_FULLY') %}
+    <div class="container">
+      {% for label, messages in app.flashes %}
+        {% for message in messages %}
+        <br />
+        <div class="flash-{{ label }}">
+          <div class="col s12 m8 offset-m2 l6 offset-l3">
+            <div class="card-panel grey lighten-5 z-depth-1">
+              <div class="row valign-wrapper">
+                <div class="col s2">
+                  <img src="https://cdn4.buysellads.net/uu/1/6167/1531147839-1525211184-62491.png" alt="" class="circle responsive-img"> <!-- notice the "circle" class -->
+                </div>
+                <div class="col s10">
+                  <h4 style="color: #2BBBAD;">   
+                   {{ message }}
+                  </h4>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      {% endfor %}
+    </div>
+        
 
-						<li><a href="/profile"><i class="material-icons right">account_circle</i>{{ app.user.nickname }}</a></li>
+      {% block body %}
+      {% endblock %}
 
-						<li><a href="/logout"><i class="material-icons right">lock</i>Logout</a></li>
+    <div class="fixed-action-btn">
+      <a class="btn-floating btn-large red">
+        <i class="large material-icons">mode_edit</i>
+      </a>
+      <ul>
+        <li><a class="btn-floating red"><i class="material-icons">insert_chart</i></a></li>
+        <li><a class="btn-floating yellow darken-1"><i class="material-icons">format_quote</i></a></li>
+        <li><a class="btn-floating green"><i class="material-icons">publish</i></a></li>
+        <li><a class="btn-floating blue"><i class="material-icons">attach_file</i></a></li>
+      </ul>
+    </div>
 
-						{% else %}
-						
-						<li><a href="/login">Login</a></li>
-						<li><a href="/register">Sign In</a></li>						
-						
-						{% endif %}									
-
-						<li><a href="/contact">Contact</a></li>
-						
-						<li style="padding-right:70px;"><a href="https://github.com/julien-lav/symfony4_tutorial">Github&nbsp;<i class="fa fa-github"></i></a></li>
-					</ul>
-				</div>
-		    </nav>
-		 </div>
-
-        {% block body %}
-
-        {% endblock %}
-	
-           <div class="fixed-action-btn">
-  <a class="btn-floating btn-large red">
-    <i class="large material-icons">mode_edit</i>
-  </a>
-  <ul>
-    <li><a class="btn-floating red"><i class="material-icons">insert_chart</i></a></li>
-    <li><a class="btn-floating yellow darken-1"><i class="material-icons">format_quote</i></a></li>
-    <li><a class="btn-floating green"><i class="material-icons">publish</i></a></li>
-    <li><a class="btn-floating blue"><i class="material-icons">attach_file</i></a></li>
-  </ul>
-</div>
-
+    {% include 'design/footer.html.twig' %}
       
-        {% block javascripts %}
-        	<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-  			<script type="text/javascript" src="{{ asset('assets/js/materialize.min.js') }}"></script>
-  			<script type="text/javascript" src="{{ asset('assets/js/main.js') }}"></script>
+    {% block javascripts %} 
+      <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+			<script type="text/javascript" src="{{ asset('assets/js/materialize.min.js') }}"></script>
+			<script type="text/javascript" src="{{ asset('assets/js/main.js') }}"></script>
 			<script type="text/javascript">$('.fixed-action-btn').floatingActionButton();</script>
-        {% endblock %}
+    {% endblock %}
     </body>
-
 </html>

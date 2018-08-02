@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 
 /**
@@ -19,16 +20,19 @@ class Tutorial
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(min=5)
      */
     private $title;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=true) 
      */
     private $content;
 
     /**
      * @ORM\Column(type="string", length=255, unique=true)
+     * @Assert\Length(min=5)
+     * @Assert\Url(message = "The url '{{ value }}' is not a valid url")
      */
     private $link;
 

@@ -18,7 +18,7 @@ class AppCreateAdminCommand extends Command
     private $entityManager;
     private $encoder;
 
-    public function __construct(EntityManagerInterface $entityManager, UserPasswordEncoderInterface$encoder)   
+    public function __construct(EntityManagerInterface $entityManager, UserPasswordEncoderInterface $encoder)   
     {
         $this->entityManager = $entityManager;
         $this->encoder = $encoder;

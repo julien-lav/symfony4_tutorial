@@ -22,7 +22,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 class TutorialController extends Controller
 {
     /**
-     * @Route("/admin/tutorial/delete/{id}", name="tutorial_delete")
+     * @Route("/admin/tutorial/delete/{id}", name="tutorial_delete_admin")
      * Method({"DELETE"})
      */    
     public function delete(Request $request, TutorialRepository $tutorialRepository, int $id) 
@@ -39,20 +39,9 @@ class TutorialController extends Controller
             die('No profile found');
     }
 
-    // <a href="{{ path( 'article_remove', {'id': article.id}) }} ">
-    // /** 
-    // * @Route("/article/remove/{id}", name="article_remove")
-    // * @ParamConverter("article", options={"mapping"={"id"="id"}})
-    // */
-    // public function remove(Article $article , EntityManagerInterface $entityManager )
-    // {
-    // $entityManager ->remove( $article );
-    // $entityManager ->flush();
-    // return $this->redirectToRoute( 'home');
-    // }
 
     /**
-     * @Route("admin/tutorial/edit/{id}", name="edit_tutorial")
+     * @Route("/admin/tutorial/edit/{id}", name="edit_tutorial_admin")
      */
     public function update(Request $request, int $id, TutorialRepository $tutorialRepository) 
     {

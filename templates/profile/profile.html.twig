@@ -6,7 +6,25 @@
 
 <br />
 <div class="container">
-	<h1>{{ user.nickname }}</h1>
+
+	<br />
+   	<br />
+	
+   
+   		<a href="/profile/tutorial" class="waves-effect waves-light btn" style="margin-right: 10px; background-color: #9575cd;"><i class="material-icons left">add</i>Add a tutorial</a>
+		
+		<a href="/profile/user/edit/{{user.id}}" class="waves-effect waves-light btn" style="margin-right: 10px; background-color: #9575cd;"><i class="material-icons left">edit</i>edit my profile</a>
+  
+		<a href="/tutorials" class="waves-effect waves-light btn" style=""><i class="material-icons left">cloud</i>See all videos</a>
+
+		{% if is_granted( 'ROLE_ADMIN') %}
+		<a href="user/list" class="waves-effect waves-light btn" style="margin-left: 10px;"><i class="material-icons left">account_circle</i>See users</a>
+		{% endif %}	
+   	<br />
+   	<br />
+	
+
+	<h1 style="float-left">{{ user.nickname }}</h1> 
 
 		<p>
 			{% if (user.firstname != null) %}
@@ -18,7 +36,7 @@
 					
 			<ul class="collection">
 				{% if user.tutorials|length == 0 %}
-    			 <p> Nothing added yet, get started ?</p>
+    				<p> Nothing added yet, get started ?</p>
 				{% endif %}
 				{% for tutorial in user.tutorials %}
 			    
@@ -46,7 +64,7 @@
 			      <p>{{ tutorial.title }} <br>
 			         {{ tutorial.content }}
 			      </p>
-			      <a href="admin/tutorial/edit/{{tutorial.id }}" class="secondary-content"><i class="material-icons">edit</i></a>
+			      <a href="admin/tutorial/edit/{{tutorial.id}}" class="secondary-content"><i class="material-icons">edit</i></a>
 			    </li>
 				
 				{% endfor %}

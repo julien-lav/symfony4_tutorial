@@ -24,7 +24,6 @@ use App\Form\AdminTutorialType;
 
 class TutorialController extends Controller
 {
-
     /**
      * @Route("/tutorials", name="tutorials")
      */
@@ -45,20 +44,22 @@ class TutorialController extends Controller
 	/**
      * @Route("/profile/tutorial", name="tutorial")
      */
-    public function tutorial(Request $request, TutorialRepository $tutorialRepository)
+    public function addTutorial(Request $request, TutorialRepository $tutorialRepository,UserInterface $user)
     {
     	$tutorial = new Tutorial();
-    	$form = $this->createForm(TutorialType::class, $tutorial);
 
+
+    	$form = $this->createForm(TutorialType::class, $tutorial);
     	$form->handleRequest($request);
 
     	if($form->isSubmitted() && $form->isValid()) {
     		$em = $this->getDoctrine()->getManager();
-    		$em->persist($tutorial);
+            $tutorial->setUser($user);  		          
+            $em->persist($tutorial);
     		$em->flush();
 
+            $this->addFlash('notice','Your tutorial has been added, thanks !');       
             return $this->redirectToRoute('tutorials');
-
     	}
 
     	return $this->render('tutorial/index.html.twig', array(
@@ -88,8 +89,7 @@ class TutorialController extends Controller
                 $em->flush();
                 return $this->redirectToRoute('tutorials');
             }
-        }
-        else {
+        } else {
             die('What are you tryin\' to do ?');
         }
 
