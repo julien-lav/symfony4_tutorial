@@ -245,7 +245,7 @@ if($form->isSubmitted() && $form->isValid()) {
 In config/services.yaml
 copy/past the .yaml from kpn's github : https://github.com/KnpLabs/KnpPaginatorBundle
 
-same thing for the view and this to your controller and you're good to go.
+Same thing for the view copy/past the code, your controller should look like this, then you're good to go.
 
 ```
 // Controller\TutorialController.php
