@@ -240,10 +240,10 @@ if($form->isSubmitted() && $form->isValid()) {
 }
 ```
 
-### Adapting KnpPaginatorBundle to symfony 4 (quick demo)
+### Adapting KnpPaginatorBundle to symfony 4
 
 In config/services.yaml
-Copy past the text from github
+Copy past the .yaml from kpn github : https://github.com/KnpLabs/KnpPaginatorBundle
 
 same thing for the view and this to your controller and you're good to go.
 
