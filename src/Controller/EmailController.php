@@ -12,7 +12,6 @@ class EmailController extends Controller
 {
 
     /**
-     * 
      * @Route("/contact", name="contact")
      */
     public function contact()
@@ -25,7 +24,6 @@ class EmailController extends Controller
     }
 
     /**
-     * 
      * @Route("/send", name="send")
      * @Method({"GET", "POST"})
      */
@@ -37,18 +35,23 @@ class EmailController extends Controller
             $email = $request->get('email');
             $subject = $request->get('subject');
             $body = $request->get('message');
-           
+
             if ($mailer instanceof \Swift_Mailer) {
-                
+
+                var_dump($name);
+
                 $message = (new \Swift_Message($subject))
                     ->setFrom($email)
-                    ->setTo("info.prepa.cinema@gmail.fr")
+                    ->setTo("info.prepa.cinema@gmail.com")
                     ->setBody(
                         $body,
                        'text/plain'
                     )
                 ;
                 $mailer->send($message);
+
+                $this->addFlash('success', 'Your email has been sent !');
+
             }
         }   
 
