@@ -20,7 +20,23 @@ if you need to stop `docker-compose down` on windows you mau have to reboot dock
 We can get rid of the "docker-compose exec web" in entering the docker bash
 
 `docker-compose exec web bash` so now you can type directly php bin/console <ANYTHING>
-    
+
+```
+Démarrer le/les containers
+docker-compose start
+
+'Stopper le/les containers
+docker-compose stop
+
+Supprimer le/les containers
+docker-compose rm
+
+Builder le/les Containers
+docker-compose up -d
+
+Check des logs
+docker logs -f <nom de container>'
+```    
 ## Adding Materialize
 
 ### Arboresence
@@ -32,7 +48,6 @@ public/assets
          |---js/materialize.min.js
          |---images/
 ```
- 
 
 In vendor/symfony/twig-bridge/Resources/views/Form
 
@@ -223,4 +238,36 @@ if($form->isSubmitted() && $form->isValid()) {
         }
 ...
 }
+```
+
+### Adapting KnpPaginatorBundle to symfony 4 (quick demo)
+
+In config/services.yaml
+Copy past the text from github
+
+same thing for the view and this to your controller and you're good to go.
+
+```
+// Controller\TutorialController.php
+
+public function index(Request $request, TutorialRepository $tutorialRepository)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $tutorials = $em->getRepository(Tutorial::class)->findAll();
+
+        /* KPN PAGINATOR */
+        $query =  $tutorials;
+        $paginator  = $this->get('knp_paginator');       
+        $pagination = $paginator->paginate(
+            $query, /* query NOT result */
+            $request->query->getInt('page', 1)/*page number*/,
+            10/*limit per page*/
+            );
+                      
+        return $this->render('tutorial/list.html.twig', array(
+            'tutorials'=> $tutorials,
+            'pagination' => $pagination,
+        ));
+    }
 ```

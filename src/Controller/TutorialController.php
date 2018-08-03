@@ -22,6 +22,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use App\Form\AdminTutorialType;
 
 
+
 class TutorialController extends Controller
 {
     /**
@@ -32,12 +33,19 @@ class TutorialController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $tutorials = $em->getRepository(Tutorial::class)->findAll();
-        // Need to go deeper here !
-        // $categoryName = $em->getRepository(Category::class)->findAll();
-        
+
+        /* KPN PAGINATOR */
+        $query = $tutorials;
+        $paginator  = $this->get('knp_paginator');       
+        $pagination = $paginator->paginate(
+            $query, /* query NOT result */
+            $request->query->getInt('page', 1)/*page number*/,
+            3/*limit per page*/
+            );
+                      
         return $this->render('tutorial/list.html.twig', array(
             'tutorials'=> $tutorials,
-            //'categoryName' => $categoryName,
+            'pagination' => $pagination,
         ));
     }
 
@@ -80,11 +88,9 @@ class TutorialController extends Controller
         if($user->getId() === $tutorial->getUser()->getId()) {
 
             $form = $this->createForm(AdminTutorialType::class, $tutorial);
-
             $form->handleRequest($request);
            
-            if($form->isSubmitted() && $form->isValid()) {
-             
+            if($form->isSubmitted() && $form->isValid()) {            
                 $em = $this->getDoctrine()->getManager();
                 $em->flush();
                 return $this->redirectToRoute('tutorials');

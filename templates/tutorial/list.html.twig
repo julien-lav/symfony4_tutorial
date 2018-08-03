@@ -33,33 +33,71 @@
 
 			        <h2>{{ tutorial.title|capitalize }}</h2>
 
-			        <p><a href="{{ tutorial.link|replace({'embed/':'watch?v='}) }}">Direct link</a> - 
-
-						{# I really need to find out how to change this #}
-				        
-				        {##}{% if tutorial.category.id >= '7' %}
-							Other
-				        {% elseif tutorial.category.id == '6' %}
-							Ruby				        
-				        {% elseif tutorial.category.id == '5' %}
-				      		Html/CSS
-				        {% elseif tutorial.category.id == '4' %}
-				        	Javascript
-				        {% elseif tutorial.category.id == '3' %}
-				        	Php
-				        {% elseif tutorial.category.id == '2' %}
-				        	React/Vue.js
-				        {% elseif tutorial.category.id == '1' %}
-				        	Symfony
-				        {% endif %}
-
+			        <p>
+			          	<a href="{{ tutorial.link|replace({'embed/':'watch?v='}) }}">Direct link</a> - 
+					        {{ tutorial.category.name }}
 			    	</p> 
 					
 					<iframe width="560" height="315" src="{{ tutorial.link|embed(tutorial.link) }}?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-
+					<p>
+						Ajouté le : {{ tutorial.createdAt | date('Y-m-d') }}
+					</p>
 			</span>
 		{% endfor %}
+
+
+				{# total items count #}
+				<div class="count">
+					{{ pagination.getTotalItemCount }}
+				</div>
+				<table>
+				<tr>
+					{# sorting of properties based on query components #}
+					<th>{{ knp_pagination_sortable(pagination, 'Id', 'a.id') }}</th>
+					<th 
+						{% if pagination.isSorted('a.Title') %} 
+							class="sorted" 
+						{% endif %}>
+						{{ knp_pagination_sortable(pagination, 'Title', 'a.title') }}
+					</th>
+					<th>
+						{{ knp_pagination_sortable(pagination, 'Release', ['a.date', 'a.time']) }}
+					</th>
+				</tr>
+
+				{# table body #}
+				{% for tutorial in pagination %}
+				<tr {% if loop.index is odd %}class="color"{% endif %}>
+					<td>{{ tutorial.id }}</td>
+					<td>{{ tutorial.title }}</td>
+					 <td>{{ tutorial.createdAt | date('Y-m-d') }}</td>
+				</tr>
+				{% endfor %}
+				</table>
+				{# display navigation #}
+
+				<div class="navigation pagination">
+				{{ knp_pagination_render(pagination) }}
+				</div>
+
+				<style>{# style for the pagination #} 
+					.pagination span.current {
+						color: #fff;
+						background: #EE6E73;
+						font-size: 1.4rem;
+					    padding: 0 10px;
+					    line-height: 34px;
+					    border-radius: 2px;
+					}					
+					.pagination a {
+					    color: #444 !important;
+					    font-size: 1.4rem;
+					    padding: 0 10px;
+					    line-height: 34px;
+					}
+				</style>
 		
+
 	</div>
 
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
