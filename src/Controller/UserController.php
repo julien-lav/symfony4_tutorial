@@ -62,7 +62,8 @@ class UserController extends Controller
                 'user'=> $user,
             ]);
         }
-            die("User doesn't exist");
+        throw $this->createNotFoundException('User not found!');
+
      }
 
     /**
@@ -84,7 +85,7 @@ class UserController extends Controller
 
             ]);
         }
-            die('No profile found');
+        throw $this->createNotFoundException('No profile found!');
      }
 
 
