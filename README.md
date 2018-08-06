@@ -96,7 +96,7 @@ twig:
 </html>
 ```
 
-## Use of UserRepository
+## The usefull use of UserRepository
 
 #### So thanks to UserRepository, this :
 ```
@@ -240,6 +240,7 @@ if($form->isSubmitted() && $form->isValid()) {
 }
 ```
 
+
 ### Adapting KnpPaginatorBundle to symfony 4
 
 In config/services.yaml
@@ -271,3 +272,12 @@ public function index(Request $request, TutorialRepository $tutorialRepository)
         ));
     }
 ```
+
+ ### TO DO
+  - Pagination on tutotials
+  - Only shows owned user's tutorials
+  - CRUD/Admin on channels
+  - Sending token on registration - use a cutom home made token maker
+  - Add private lessons - find teachers 
+  - Deploy online
+  - Continue explanations in the README.md
