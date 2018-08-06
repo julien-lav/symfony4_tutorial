@@ -38,7 +38,7 @@ class EmailController extends Controller
 
             if ($mailer instanceof \Swift_Mailer) {
 
-                var_dump($name);
+                // var_dump($name);
 
                 $message = (new \Swift_Message($subject))
                     ->setFrom($email)
@@ -54,7 +54,6 @@ class EmailController extends Controller
 
             }
         }   
-
 		    return $this->render('contact/index.html.twig', 
 		    [
 		    // Used here to reload the page
