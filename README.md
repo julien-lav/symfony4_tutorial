@@ -275,11 +275,12 @@ public function index(Request $request, TutorialRepository $tutorialRepository)
 
  ### TO DO
   - Pagination on tutotials
-  - Only shows owned user's tutorials
+  - Only shows user's owned tutorials
   - CRUD/Admin on channels
   - Sending token on registration - use a cutom home made token maker
   - Add private lessons - find teachers 
   - Continue explanations in the README.md
     
-    /*Failled on heroku*/
+    
   - Deploy online
+    /*Nginx ??? .htaccess ???*/
