@@ -1,1 +1,1 @@
-web: vendor/bin/heroku-php-nginx -C rewrite.conf www/
+web: $(composer config bin-dir)/heroku-php-nginx -C nginx.conf public/

@@ -101,7 +101,7 @@ class UserController extends Controller
 
             $form = $this->createForm(AdminUserType::class, $user);
 
-             $form->handleRequest($request);
+            $form->handleRequest($request);
        
             if($form->isSubmitted() && $form->isValid()) {
                 $password = $passwordEncoder->encodePassword($user, $user->getPassword());
@@ -113,7 +113,6 @@ class UserController extends Controller
             }   
         } else {
             die('What are you tryin\' to do ?');
-
         }
 
         return $this->render('user/update.html.twig', 
