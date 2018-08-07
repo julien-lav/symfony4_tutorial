@@ -10,7 +10,6 @@
 	<br />
    	<br />
 	
-   
    		<a href="/profile/tutorial" class="waves-effect waves-light btn" style="margin-right: 10px; background-color: #9575cd;"><i class="material-icons left">add</i>Add a tutorial</a>
 		
 		<a href="/profile/user/edit/{{user.id}}" class="waves-effect waves-light btn" style="margin-right: 10px; background-color: #9575cd;"><i class="material-icons left">edit</i>edit my profile</a>
@@ -36,21 +35,18 @@
 					
 			<ul class="collection">
 				{% if user.tutorials|length == 0 %}
-    				<p> Nothing added yet, get started ?</p>
+    				<p>&nbsp; Nothing added yet ! <a href="/profile/tutorial" class="waves-effect waves-light btn" style="margin-left: 30px; background-color: #ba2a6d;"> get started ?</a></p>
 				{% endif %}
 				{% for tutorial in user.tutorials %}
 			    
-			    <li class="collection-item avatar">
-			      <i class="material-icons circle red">play_arrow</i>
-			      <span class="title">Title</span>
-			      <p>{{ tutorial.title }} <br>
-			         {{ tutorial.content }}
-			      </p>
+			  <li class="collection-item avatar">
+			      <a href="{{ tutorial.link }}"><i class="material-icons circle red">play_arrow</i></a>
+			      <span class="title">{{ tutorial.title }}</span>
+			      <p> {{ tutorial.content }} </p>
 			      <a href="profile/tutorial/edit/{{tutorial.id }}" class="secondary-content"><i class="material-icons">edit</i></a>
 			    </li>
 				{% endfor %}
 			</ul>
-
 
 		{% if is_granted('ROLE_ADMIN') %}
 		<h5>User's tutorial list :</h5>
@@ -59,11 +55,9 @@
 				{% for tutorial in tutorials %}
 			    
 			    <li class="collection-item avatar">
-			      <i class="material-icons circle red">play_arrow</i>
-			      <span class="title">Title</span>
-			      <p>{{ tutorial.title }} <br>
-			         {{ tutorial.content }}
-			      </p>
+			      <a href="{{ tutorial.link }}"><i class="material-icons circle red">play_arrow</i></a>
+			      <span class="title">{{ tutorial.title }}</span>
+			      <p> {{ tutorial.content }} </p>
 			      <a href="admin/tutorial/edit/{{tutorial.id}}" class="secondary-content"><i class="material-icons">edit</i></a>
 			    </li>
 				

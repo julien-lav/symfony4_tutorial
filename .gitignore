@@ -6,4 +6,5 @@
 /var/
 /vendor/*
 !/vendor/heroku/heroku-buildpack-php/support/build/_conf/nginx/*
+!/vendor/symfony/twig-bridge/Resources/views/Form*
 ###< symfony/framework-bundle ###

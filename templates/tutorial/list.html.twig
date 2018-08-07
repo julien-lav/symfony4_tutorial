@@ -9,11 +9,13 @@
 
 	<div class="container">
 		<div class="row">
+
 			<input type="search" id="filter-criteria" style="visibility: hidden;">
 			<div class="input-field col s5">
 			    <select id="filter-select">
+			    		
 					<option value="all" disabled selected>Select a language/framework</option>
-					<option value="all">All</option>
+					<option value="all">All	<span class="count"> - ({{ pagination.getTotalItemCount }}) </span>	</option>
 					<option value="filter-1">Symfony</option>
 					<option value="filter-2">React/Vue.js</option>
 					<option value="filter-3">Php</option>
@@ -25,9 +27,9 @@
 			    <label>Filter by category</label>
 			</div>
 		</div>
-		
+							
 		<br />
-		
+
 		{% for tutorial in tutorials %}
 			<span  style="float: left; margin-left: 15px;" class="filter-{{tutorial.category.id}} item">
 
@@ -46,10 +48,8 @@
 		{% endfor %}
 
 
-				{# total items count #}
-				<div class="count">
-					{{ pagination.getTotalItemCount }}
-				</div>
+				
+			
 				<table>
 				<tr>
 					{# sorting of properties based on query components #}
