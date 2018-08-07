@@ -68,6 +68,9 @@
     "egulias/email-validator": {
         "version": "2.1.4"
     },
+    "heroku/heroku-buildpack-php": {
+        "version": "v140"
+    },
     "jdorn/sql-formatter": {
         "version": "v1.2.17"
     },

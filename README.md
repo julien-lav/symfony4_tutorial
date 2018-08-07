@@ -282,5 +282,5 @@ public function index(Request $request, TutorialRepository $tutorialRepository)
   - Continue explanations in the README.md
     
     
-  - Deploy online
+  - Deploy online on heroku
     /*Nginx ??? .htaccess ???*/
