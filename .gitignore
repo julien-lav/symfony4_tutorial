@@ -5,5 +5,5 @@
 /var/
 /vendor/
 /.idea/
-!nginx.conf
+!/vendor/heroku/heroku-buildpack-php/support/build/_conf/nginx
 ###< symfony/framework-bundle ###
