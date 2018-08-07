@@ -1,9 +1,9 @@
 
 ###> symfony/framework-bundle ###
+/.idea/
 /.env
 /public/bundles/
 /var/
-/vendor/
-/.idea/
-!/vendor/heroku/heroku-buildpack-php/support/build/_conf/nginx/**
+/vendor/*
+!/vendor/heroku/heroku-buildpack-php/support/build/_conf/nginx/*
 ###< symfony/framework-bundle ###
