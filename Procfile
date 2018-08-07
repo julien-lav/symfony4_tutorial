@@ -1,1 +1,1 @@
-'web: ./scripts/build_nginx.sh' 
+web: vendor/bin/heroku-php-nginx -C rewrite.conf www/
